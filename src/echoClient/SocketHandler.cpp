@@ -27,7 +27,7 @@ void SocketHandler::run() {
 			std::cout << "Disconnected. Exiting...\n" << std::endl;
 			keepGoin=false;
 			connector_->close();
-			std::cout<<"Disconnected from the server,for termination press any key....\n"<<std::endl;
+			std::cout<<"Disconnected from the server,for termination press ***ENTER***....\n"<<std::endl;
 			break;
 		}
 
