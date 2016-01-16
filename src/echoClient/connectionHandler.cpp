@@ -100,6 +100,6 @@ void ConnectionHandler::close() {
     try{
         socket_.close();
     } catch (...) {
-        std::cout << "closing failed: connection already closed" << std::endl;
+        std::cout << "closing failed: connection already closed..\n" << std::endl;
     }
 }
