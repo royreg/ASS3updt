@@ -13,7 +13,8 @@ UserInhandler::UserInhandler(ConnectionHandler &connector) {
 }
 
 void UserInhandler::run() {
-	while (true) {
+	bool keepGoin =true;
+	while (keepGoin) {
 		const short bufsize = 1024;
 		char buf[bufsize];
 		std::cin.getline(buf, bufsize);
@@ -23,6 +24,7 @@ void UserInhandler::run() {
 			std::cout << "Disconnected. Exiting...\n" << std::endl;
 			break;
 		}
+
 	}
 }
 

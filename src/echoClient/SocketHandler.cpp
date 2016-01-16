@@ -13,16 +13,21 @@ SocketHandler::SocketHandler(ConnectionHandler &connector) {
 }
 void SocketHandler::run() {
 
-	while (true) {
+	bool keepGoin =true;
+	while (keepGoin) {
 		std::string answer;
 		if (!connector_->getLine(answer)) {
 			std::cout << "Disconnected. Exiting...\n" << std::endl;
+
 			break;
 		}
 		answer = answer.substr(0, answer.length() - 1);
 		std::cout << "\n" << answer << "\n" << std::endl;
-		if(answer=="bye"){
+		if(answer=="SYSMSG QUIT ACCEPTED"){
 			std::cout << "Disconnected. Exiting...\n" << std::endl;
+			keepGoin=false;
+			connector_->close();
+			std::cout<<"Disconnected from the server,for termination press any key"<<std::endl;
 			break;
 		}
 

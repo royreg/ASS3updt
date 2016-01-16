@@ -28,7 +28,7 @@ bool ConnectionHandler::connect() {
         std::cerr << "Connection failed (Error: " << e.what() << ')' << std::endl;
         return false;
     }
-    std::cout<< "Successfully connected to "<<host_<<endl;
+
     return true;
 }
  
@@ -86,6 +86,7 @@ bool ConnectionHandler::getFrameAscii(std::string& frame, char delimiter) {
         return false;
     }
     return true;
+
 }
  
 bool ConnectionHandler::sendFrameAscii(const std::string& frame, char delimiter) {

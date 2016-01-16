@@ -22,6 +22,7 @@ int main (int argc, char *argv[]) {
         std::cerr << "Cannot connect to " << host << ":" << port << std::endl;
         return 1;
     }
+    std::cout<< "Successfully connected to "<<host<<std::endl;
 	
     UserInhandler usr(connectionHandler);
     SocketHandler sh(connectionHandler);
