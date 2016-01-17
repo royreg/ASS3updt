@@ -24,10 +24,10 @@ void SocketHandler::run() {
 		answer = answer.substr(0, answer.length() - 1);
 		std::cout << "\n" << answer << "\n" << std::endl;
 		if(answer=="SYSMSG QUIT ACCEPTED"){
-			std::cout << "Disconnected. Exiting...\n" << std::endl;
-			keepGoin=false;
 			connector_->close();
-			std::cout<<"Disconnected from the server,for termination press ***ENTER***....\n"<<std::endl;
+			std::cout << "socketHandler Disconnected. Exiting...\n" << std::endl;
+			keepGoin=false;
+			std::cout<<"Disconnecting from the server,for termination press ***ENTER***....\n"<<std::endl;
 			break;
 		}
 

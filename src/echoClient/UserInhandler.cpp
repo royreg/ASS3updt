@@ -21,7 +21,8 @@ void UserInhandler::run() {
 		std::string line(buf);
 		int len = line.length();
 		if (!connector_->sendLine(line)) {
-			std::cout << "Disconnected. Exiting...\n" << std::endl;
+			std::cout << "Client Disconnected. Exiting...\n" << std::endl;
+			keepGoin=false;
 			break;
 		}
 
