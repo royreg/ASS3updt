@@ -1,4 +1,4 @@
-#include "../../include/connectionHandler.h"
+#include "../include/connectionHandler.h"
  
 using boost::asio::ip::tcp;
 
@@ -102,4 +102,43 @@ void ConnectionHandler::close() {
     } catch (...) {
         std::cout << "closing failed: connection already closed..\n" << std::endl;
     }
+}
+void ConnectionHandler::SocketHandlerrun() {
+
+	bool keepGoin =true;
+	while (keepGoin) {
+		std::string answer;
+		if (!this->getLine(answer)) {
+			std::cout << "Disconnected. Exiting...\n" << std::endl;
+
+			break;
+		}
+		answer = answer.substr(0, answer.length() - 1);
+		std::cout << "\n" << answer << "\n" << std::endl;
+		if(answer=="SYSMSG QUIT ACCEPTED"){
+			this->close();
+			std::cout << "socketHandler Disconnected. Exiting...\n" << std::endl;
+			keepGoin=false;
+			std::cout<<"Disconnecting from the server,for termination press ***ENTER***....\n"<<std::endl;
+			break;
+		}
+
+	}
+
+}
+void ConnectionHandler::UserInHandlerlerrun() {
+	bool keepGoin =true;
+	while (keepGoin) {
+		const short bufsize = 1024;
+		char buf[bufsize];
+		std::cin.getline(buf, bufsize);
+		std::string line(buf);
+
+		if (!this->sendLine(line)) {
+			std::cout << "Client Disconnected. Exiting...\n" << std::endl;
+			keepGoin=false;
+			break;
+		}
+
+	}
 }

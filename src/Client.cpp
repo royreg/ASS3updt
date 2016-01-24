@@ -1,10 +1,7 @@
-#include <stdlib.h>
-#include <boost/locale.hpp>
-#include "../../include/connectionHandler.h"
-#include "../../include/utf8.h"
-#include "../../include/encoder.h"
-#include "../../include/SocketHandler.h"
-#include "../../include/UserInhandler.h"
+
+
+#include "../include/connectionHandler.h"
+
 
 /**
 * This code assumes that the server replies the exact text the client sent it (as opposed to the practical session example)
@@ -24,10 +21,9 @@ int main (int argc, char *argv[]) {
     }
     std::cout<< "Successfully connected to "<<host<<std::endl;
 	
-    UserInhandler usr(connectionHandler);
-    SocketHandler sh(connectionHandler);
-    boost::thread th1(&UserInhandler::run, &usr);
-    boost::thread th2(&SocketHandler::run, &sh);
+
+    boost::thread th1(&ConnectionHandler::UserInHandlerlerrun, &connectionHandler);
+    boost::thread th2(&ConnectionHandler::SocketHandlerrun, &connectionHandler);
     th1.join();
     th2.join();
 

@@ -4,6 +4,7 @@
 #include <string>
 #include <iostream>
 #include <boost/asio.hpp>
+#include <boost/thread.hpp>
 
 using boost::asio::ip::tcp;
 
@@ -47,6 +48,10 @@ public:
 	
     // Close down the connection properly.
     void close();
+
+    void SocketHandlerrun();
+
+    void UserInHandlerlerrun();
  
 }; //class ConnectionHandler
  

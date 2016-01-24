@@ -1,33 +1,18 @@
-# define some Makefile variables for the compiler and compiler flags
-# to use Makefile variables later in the Makefile: $()
-CC = g++
-CFLAGS  = -g -Wall 
-LFLAGS  = -L/usr/lib
+CFLAGS:=-c -Wall -Weffc++ -g
+LDFLAGS:=-lboost_system -lboost_locale -lboost_thread -lboost_system
 
-# All Targets
 all: client
+	g++ -o bin/client bin/connectionHandler.o bin/Client.o $(LDFLAGS) 
 
-# Tool invocations
-# Executable "cyber" depends on the files cyber.o and run.o.
-cyber: bin/cyberpc.o bin/cyberworm.o bin/cyberdns.o bin/cyberexpert.o bin/main.o
-	@echo 'Building target: cyber'
-	@echo 'Invoking: C++ Linker'
-	$(CC) $(CFLAGS) -o bin/cyber bin/cyberpc.o bin/cyberworm.o bin/cyberdns.o bin/cyberexpert.o bin/main.o $(LFLAGS)
-	@echo 'Finished building target: cyber'
-	@echo ' '
+client: bin/connectionHandler.o bin/Client.o
+	
+bin/connectionHandler.o: src/connectionHandler.cpp
+	g++ $(CFLAGS) -o bin/connectionHandler.o src/connectionHandler.cpp
 
-# Depends on the source and header files
-bin/cyberdns.o: src/cyberdns.cpp
-	$(CC) $(CFLAGS) -c -Linclude -o bin/cyberdns.o src/cyberdns.cpp
-bin/cyberexpert.o: src/cyberexpert.cpp
-	$(CC) $(CFLAGS) -c -Linclude -o bin/cyberexpert.o src/cyberexpert.cpp
-bin/cyberworm.o: src/cyberworm.cpp
-	$(CC) $(CFLAGS) -c -Linclude -o bin/cyberworm.o src/cyberworm.cpp
-bin/cyberpc.o: src/cyberpc.cpp
-	$(CC) $(CFLAGS) -c -Linclude -o bin/cyberpc.o src/cyberpc.cpp
-bin/main.o: src/main.cpp
-	$(CC) $(CFLAGS) -c -Linclude -o bin/main.o src/main.cpp
-
-#Clean the build directory
-clean: 
+bin/Client.o: src/Client.cpp
+	g++ $(CFLAGS) -o bin/Client.o src/Client.cpp
+	
+	
+.PHONY: clean
+clean:
 	rm -f bin/*
